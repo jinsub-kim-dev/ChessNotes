@@ -1,0 +1,22 @@
+[
+  {
+    "title": "퀸 강제 교환 대응 수",
+    "boards": [
+      {
+        "fen": "r3kbnr/ppp1Qppp/2n5/3P4/2Bp2b1/5N2/PPP2PPP/RNB1K2R",
+        "orientation": "black",
+        "note": "Qxe7+ 이후 퀸 교환 강제 상황. 교환 방법은 ...Ncxe7, ...Ngxe7, ...Bxe7, ...Kxe7가 있음"
+      },
+      {
+        "fen": "r3k1nr/ppp1bppp/2n5/3P4/2Bp2b1/5N2/PPP2PPP/RNB1K2R",
+        "orientation": "black",
+        "note": "...Bxe2로 퀸 교환했는데 이러면 다음에 dxc6로 나이트가 공짜로 잡히게 됨"
+      },
+      {
+        "fen": "r3kbnr/ppp1nppp/8/3P4/2Bp2b1/5N2/PPP2PPP/RNB1K2R",
+        "orientation": "black",
+        "note": "따라서 ...Ncxe7로 공격에서 빠져나옴과 동시에 퀸 교환을 하는 것이 올바른 수"
+      }
+    ]
+  }
+]

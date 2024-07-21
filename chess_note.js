@@ -236,14 +236,30 @@ function saveData() {
     URL.revokeObjectURL(url);
 }
 
-function loadData() {
-    const savedData = localStorage.getItem('chessGames');
-    if (savedData) {
-        const games = JSON.parse(savedData);
-        games.forEach(gameData => {
-            createGameFromData(gameData);
-        });
+function handleFileLoad(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const data = JSON.parse(content);
+            loadGamesFromData(data);
+        };
+        reader.readAsText(file);
     }
+}
+
+function loadGamesFromData(data) {
+    const gamesContainer = document.getElementById('games');
+    while (gamesContainer.firstChild) {
+        gamesContainer.removeChild(gamesContainer.firstChild);
+    }
+    boards = {};
+    gameIdCounter = 0;
+
+    data.forEach(gameData => {
+        createGameFromData(gameData);
+    });
 }
 
 function createGameFromData(gameData) {
@@ -266,7 +282,9 @@ function createGameFromData(gameData) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
-
 document.getElementById('addGame').addEventListener('click', () => createGame(null));
+document.getElementById('loadData').addEventListener('click', () => {
+    document.getElementById('fileInput').click();
+});
+document.getElementById('fileInput').addEventListener('change', handleFileLoad);
 document.getElementById('saveData').addEventListener('click', saveData);
