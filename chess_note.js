@@ -199,15 +199,6 @@ function handleTitleClick(event) {
     }
 }
 
-function showSnackbar(message) {
-    const snackbar = document.getElementById('snackbar');
-    snackbar.textContent = message;
-    snackbar.className = 'show';
-    setTimeout(() => {
-        snackbar.className = snackbar.className.replace('show', '');
-    }, 3000);
-}
-
 function saveData() {
     const games = Array.from(document.querySelectorAll('.game')).map(game => {
         const gameId = game.id.replace('container', '');
@@ -230,10 +221,19 @@ function saveData() {
         };
     });
 
-    const jsonData = JSON.stringify(games, null, 2);
-    localStorage.setItem('chessGames', jsonData);
+    const jsonString = JSON.stringify(games, null, 2);
 
-    showSnackbar('Data saved successfully!');
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    console.log("???");
+
+    URL.revokeObjectURL(url);
 }
 
 function loadData() {
